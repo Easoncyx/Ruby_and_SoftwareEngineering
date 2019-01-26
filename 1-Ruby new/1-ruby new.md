@@ -23,7 +23,7 @@
 	```java
 	number = Math.abs(number) // Java code
 	```
-#Some baisc Ruby
+# Some baisc Ruby
 
 
 1. Addition of string
@@ -178,4 +178,138 @@
 	square = 2
 	square = square * square while square < 1000
 	puts square
+	```
+#Regular Expressions
+1. Most of Ruby’s built-in types will be familiar to all programmers. A majority of languages have strings, integers, ﬂoats, arrays, and so on. However, **regular expression** support is typically built into only scripting languages, such as Ruby, Perl, and awk. 
+
+	This is a shame: regular expressions, although cryptic, are a powerful tool for working with text. And having them built in, rather than tacked on through a library interface, makes a big difference.
+	
+2. A regular expression is simply a way of specifying a pattern of characters to be matched in a string. In Ruby, you typically create a regular expression by writing a pattern between **slash characters (/pattern/)**. And, Ruby being Ruby, regular expressions are objects and can be manipulated as such.
+
+3. `/Perl|Python/` or `/P(erl|ython)/`
+	The forward slashes delimit the pattern, which consists of the two things we’re matching, separated by a pipe character (|). This pipe character means “either the thing on the right or the thing on the left,” in this case either Perl or Python. You can use parentheses within patterns, just as you can in arithmetic expressions, so you could also have written this pattern as
+	
+1. `/ab+c/` matches a string containing an a followed by one or more b’s, followed by a c. 
+	
+1. Change the plus to an asterisk, and `/ab*c/` creates a regular expression that matches one a, zero or more b’s, and one c.
+
+1. Some example
+	![image3](3.png)
+	
+	![image2](2.png)
+	
+1. Use patern. The **match operator =~** can be used to match a string against a regular expression. 
+
+	If the pattern is found in the string, =~ returns its starting position, otherwise it returns nil. This means you can use regular expressions as the condition in if and while statements.
+	
+	```ruby
+	if line =~ /Perl|Python/
+  	  puts "pattern found: #{line}"
+	end
+	```
+	
+1. Replace the matched pattern
+
+	```ruby
+	line.sub(/Perl/, 'Ruby') # replace first 'Perl' with 'Ruby'
+	line.gsub(/Perl/, 'Ruby') # replace every 'Perl' with 'Ruby'
+	```
+	
+# Blocks and iterators
+1. Code blocks: chunks of code you can associate with method invocations, almost as if they were parameters. 
+
+	We try to follow what is becoming a Ruby standard and use braces for single-line blocks and do/end for multiline blocks.
+1. single line block
+
+	```ruby
+	{puts "hello"} # a single line code block
+	```
+2. multi line block	
+
+	```ruby
+	do
+	  puts "aaa"
+	  puts "bbb"
+	end
+	```
+3. yield
+	
+	```ruby
+	def call_block
+	  puts "Start"
+	  yield
+	  yield
+	  puts "End"
+	end
+	call_block {puts "in the block"}
+	```
+	
+	give us
+	
+	```
+	Start
+	in the block
+	in the block
+	End
+	```
+	
+4. another example 
+	
+	```ruby
+	animals = %w( ant bee cat dog elk)
+	animals.each{|animals| puts animals}
+	animals.each{|name| print name, " "}
+	5.times {print "*"}
+	3.upto(6) {|i| print i}
+	('a'..'e').each {|char| print char}
+	```
+	
+5. example
+
+	```ruby
+	class Person
+	    def initialize( name )
+	         @name = name
+	    end
+	
+	    def do_with_name
+	        yield( @name )
+	    end
+	end
+	
+	person = Person.new("Oscar")
+		
+	#invoking the method passing a block
+	person.do_with_name do |name|
+	    puts "Hey, his name is #{name}"
+	end
+	
+	#invoke the method passing a different block
+	person.do_with_name do |name|
+	    puts "Hey, his name is #{name.reverse}"
+	end
+	```
+6. eg
+
+	```ruby
+	days = ["monday", "tuesday", "wednesday", "thursday", "friday"]
+	# select those which start with 't'
+	days.select do |item|
+	  item.match /^t/
+	end
+	```
+	
+# Reading and Writing
+1. **puts** writes its arguments, adding a newline after each. 
+2. **print** also writes its arguments, but with no newline. Both can be used to write to any I/O object, but by default they write to standard output.
+3. Another output method we use a lot is **printf**, which prints its arguments under the control of a format string
+
+	```ruby
+	printf("Number: %5.2f,\nString: %s \n",1.23,"hello")
+	```
+4. input
+	
+	```ruby
+	line = gets
+	print line
 	```
