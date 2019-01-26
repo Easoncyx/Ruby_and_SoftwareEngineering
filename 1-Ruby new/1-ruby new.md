@@ -1,3 +1,16 @@
+# Table of Content
+<!-- TOC -->
+
+- [Ruby is an object oriented language](#ruby-is-an-object-oriented-language)
+- [Some baisc Ruby](#some-baisc-ruby)
+- [Arrays and Hashes](#arrays-and-hashes)
+- [Control Structure](#control-structure)
+- [Regular Expressions](#regular-expressions)
+- [Blocks and iterators](#blocks-and-iterators)
+- [Reading and Writing](#reading-and-writing)
+
+<!-- /TOC -->
+
 # Ruby is an object oriented language
 1. In Ruby, you’d deﬁne a **class** to represent each of these entities. A class is a combination of state -- **instance variable** (for example, the name of the song) and **instance methods** that use that state (perhaps a method to play the song).
 
