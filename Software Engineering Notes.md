@@ -1,5 +1,31 @@
-{{TOC}}
+<!-- TOC -->
 
+- [Software Engineering Debug Log](#software-engineering-debug-log)
+    - [Bugs about PostgreSQL](#bugs-about-postgresql)
+        - [PG::ConnectionBad](#pgconnectionbad)
+        - [ERROR: invalid value for parameter "TimeZone": "UTC" : SET time zone 'UTC'](#error-invalid-value-for-parameter-timezone-utc--set-time-zone-utc)
+    - [Bugs about Bundle](#bugs-about-bundle)
+    - [Bugs about rails](#bugs-about-rails)
+        - [/bin/rails does not exist](#binrails-does-not-exist)
+- [Set up PostgreSQL](#set-up-postgresql)
+    - [Install, start and stop postgresql server](#install-start-and-stop-postgresql-server)
+    - [User](#user)
+        - [CREATE ROLE with psql](#create-role-with-psql)
+        - [The createuser utility](#the-createuser-utility)
+- [Setup a new project with ruby on rails](#setup-a-new-project-with-ruby-on-rails)
+- [homebrew](#homebrew)
+- [Git](#git)
+    - [branch](#branch)
+    - [fork](#fork)
+        - [问题来源](#%E9%97%AE%E9%A2%98%E6%9D%A5%E6%BA%90)
+        - [fork别人的repo](#fork%E5%88%AB%E4%BA%BA%E7%9A%84repo)
+        - [开发并且提交代码](#%E5%BC%80%E5%8F%91%E5%B9%B6%E4%B8%94%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81)
+            - [clone](#clone)
+            - [commit](#commit)
+            - [push](#push)
+            - [pull request](#pull-request)
+
+<!-- /TOC -->
 # Software Engineering Debug Log
 ## Bugs about PostgreSQL
 ### PG::ConnectionBad
@@ -20,31 +46,45 @@ Reboot your computer
 
 ## Bugs about Bundle
 To downgrade the version of bundler
+
 `gem uninstall bundler`
+
 `gem install bundler --version '1.16.6'`
 
 
 ## Bugs about rails
 ### /bin/rails does not exist
-If you see an error said "/bin/rails does not exist" on heroku logs, run `rake rails:update:bin`
+If you see an error said "/bin/rails does not exist" on heroku logs, run
+
+`rake rails:update:bin`
+
 Then commit and push to heroku again
 
 
 # Set up PostgreSQL
 See [this link](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) for more detail about psql
 ## Install, start and stop postgresql server
-`brew install postgresql`
+- install:
 
-`brew services start postgresql`
-`brew services stop postgresql`
+	`brew install postgresql`
 
-`brew services list`
+- start and stop the server:
 
-Make sure Postgres starts every time your computer starts up. Execute the following command:
-`pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`
+	`brew services start postgresql`
 
-See the version of postgresql
-`postgres -V`
+	`brew services stop postgresql`
+
+- check the running server:
+
+	`brew services list`
+
+- Make sure Postgres starts every time your computer starts up. Execute the following command:
+
+	`pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`
+
+- See the version of postgresql:
+
+	`postgres -V`
 
 ## User
 Log in as specific user:
@@ -116,11 +156,12 @@ This will create development and test databases, set their owners to the user sp
 In the gem file, use
 `gem 'pg', '~> 0.20.0'`
 
-On heroku, you only need to run `db:migrate` and `db:seed`. 
+On heroku, you only need to run `db:migrate` and `db:seed`.
 The test database is used locally so you don't need to run `db:test:prepare`
 
 # homebrew
 `brew search <search term>`
+
 `brew list postgres`
 
 # Git
