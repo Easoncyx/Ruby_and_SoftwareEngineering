@@ -304,4 +304,12 @@ Similarly, you could add and commit all the files on one line with this command:
 
 `git add .` stages new and modified files
 
-`git add -u` stages Modified and Deleted filesM
+`git add -u` stages Modified and Deleted files
+
+## git push
+
+`git push -u origin master`
+
+把主分支推送到github，以后再推送时，可以省略后面的参数，简写成：
+
+`git push`
