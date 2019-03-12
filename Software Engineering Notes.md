@@ -1,31 +1,4 @@
-<!-- TOC -->
 
-- [Software Engineering Debug Log](#software-engineering-debug-log)
-    - [Bugs about PostgreSQL](#bugs-about-postgresql)
-        - [PG::ConnectionBad](#pgconnectionbad)
-        - [ERROR: invalid value for parameter "TimeZone": "UTC" : SET time zone 'UTC'](#error-invalid-value-for-parameter-timezone-utc--set-time-zone-utc)
-    - [Bugs about Bundle](#bugs-about-bundle)
-    - [Bugs about rails](#bugs-about-rails)
-        - [/bin/rails does not exist](#binrails-does-not-exist)
-- [Set up PostgreSQL](#set-up-postgresql)
-    - [Install, start and stop postgresql server](#install-start-and-stop-postgresql-server)
-    - [User](#user)
-        - [CREATE ROLE with psql](#create-role-with-psql)
-        - [The createuser utility](#the-createuser-utility)
-- [Setup a new project with ruby on rails](#setup-a-new-project-with-ruby-on-rails)
-- [homebrew](#homebrew)
-- [Git](#git)
-    - [branch](#branch)
-    - [fork](#fork)
-        - [问题来源](#%E9%97%AE%E9%A2%98%E6%9D%A5%E6%BA%90)
-        - [fork别人的repo](#fork%E5%88%AB%E4%BA%BA%E7%9A%84repo)
-        - [开发并且提交代码](#%E5%BC%80%E5%8F%91%E5%B9%B6%E4%B8%94%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81)
-            - [clone](#clone)
-            - [commit](#commit)
-            - [push](#push)
-            - [pull request](#pull-request)
-
-<!-- /TOC -->
 # Software Engineering Debug Log
 ## Bugs about PostgreSQL
 ### PG::ConnectionBad
@@ -166,6 +139,7 @@ The test database is used locally so you don't need to run `db:test:prepare`
 
 # Git
 See [this link](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html) for Git 工作流程
+
 ## branch
 Before creating a new branch, pull the changes from upstream. Your master needs to be up to date.
 
@@ -182,6 +156,18 @@ Push the branch on Github:
 You can see all branches created by using :
 
 `$ git branch -a`
+
+After development, in order to merge to the master, run:
+
+`git checkout master`
+
+`git merge [name_of_your_new_branch]`
+
+In order to get the latest code from master:
+
+check out to your branch, run:
+
+`git merge master`
 
 ## fork
 ### 问题来源
@@ -291,3 +277,31 @@ git commit
 功德圆满 ：）
 
 登陆github，在你自己的账号中的仓库中点击pull request，就会要求你输入pull request的原因和详细信息，你确认之后。osteach的owner就会收到并且审查，审查通过就会合并到主干上。
+
+## git add and git commit
+I would suggest, if you only changed one file then you might do something like this:
+
+```
+git add "Your_file.txt"
+git commit -m "added a new feature in a file"
+git push heroku master
+```
+
+Or if you changed multiple files then you could do something like this:
+
+```
+git add .
+git commit -m "some files changed"
+git push heroku master
+```
+
+Similarly, you could add and commit all the files on one line with this command:
+
+`git commit -am "added a new feature some files changed"`
+
+
+`git add -A` stages ALL files (new, modified, deleted)
+
+`git add .` stages new and modified files
+
+`git add -u` stages Modified and Deleted filesM
