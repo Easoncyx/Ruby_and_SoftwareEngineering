@@ -313,3 +313,35 @@ Similarly, you could add and commit all the files on one line with this command:
 把主分支推送到github，以后再推送时，可以省略后面的参数，简写成：
 
 `git push`
+
+
+## Mirroring a repository
+[See this link](https://help.github.com/en/articles/duplicating-a-repository)
+
+To duplicate a repository without forking it, you can run a special clone command, then mirror-push to the new repository.
+
+Before you can duplicate a repository and push to your new copy, or mirror, of the repository, you must create the new repository on GitHub.
+
+In these examples, `exampleuser/new-repository` is the mirrors.
+
+Mirroring a repository
+
+Open Terminal.
+
+Create a bare clone of the repository.
+```
+$ git clone --bare https://github.com/exampleuser/old-repository.git
+```
+
+Mirror-push to the new repository.
+
+```
+$ cd old-repository.git
+$ git push --mirror https://github.com/exampleuser/new-repository.git
+```
+
+Remove the temporary local repository you created in step 1.
+```
+$ cd ..
+$ rm -rf old-repository.git
+```
