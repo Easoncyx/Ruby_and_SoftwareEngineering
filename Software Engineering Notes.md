@@ -33,68 +33,6 @@ If you see an error said "/bin/rails does not exist" on heroku logs, run
 
 Then commit and push to heroku again
 
-
-# Set up PostgreSQL
-See [this link](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) for more detail about psql
-## Install, start and stop postgresql server
-- install:
-
-	`brew install postgresql`
-
-- start and stop the server:
-
-	`brew services start postgresql`
-
-	`brew services stop postgresql`
-
-- check the running server:
-
-	`brew services list`
-
-- Make sure Postgres starts every time your computer starts up. Execute the following command:
-
-	`pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`
-
-- See the version of postgresql:
-
-	`postgres -V`
-
-## User
-Log in as specific user:
-`psql postgres`
-`psql -U postgres` (-U means User)
-
-By default, it automatically creates the user postgres. Let’s see what other users it has created.
-Show users:
-`postgres=# \du`
-
-`createuser -s postgres`
-`ALTER USER postgres WITH PASSWORD ‘password’;`
-
-### CREATE ROLE with psql
-`CREATE ROLE username WITH LOGIN PASSWORD 'quoted password' [OPTIONS]`
-
-See the password of a user
-`postgres=# \password postgres`
-
-Create role
-
-```
-postgres=# CREATE ROLE patrick WITH LOGIN PASSWORD 'Getting started';
-postgres=# \du
-```
-
-Let’s add the CREATEDB permission to our new user to allow them to create databases:
-
-```
-postgres=# ALTER ROLE patrick CREATEDB;
-postgres=# \du
-postgres=# \q
-```
-[Documentation for `CREATE ROLE`](https://www.postgresql.org/docs/current/sql-createrole.html)
-### The createuser utility
-TBC
-
 # Setup a new project with ruby on rails
 See [this link](https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres) for details.
 `rails new myapp --database=postgresql`
