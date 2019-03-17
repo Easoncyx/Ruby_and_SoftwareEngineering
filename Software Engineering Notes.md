@@ -284,3 +284,64 @@ $ cd ..
 $ rm -rf old-repository.git
 ```
 
+
+
+
+
+# HW4
+
+In cloud 9:
+
+```
+sudo service postgresql start
+rake db:setup
+rake db:migrate
+rails server -p $PORT -b $IP
+
+bundle exec rake cucumber
+bundle exec rake spec
+```
+
+my history:
+
+to [configure postsql](https://medium.com/@floodfx/setting-up-postgres-on-cloud9-ide-720e5b879154) on cloud 9
+
+```
+    1  ls
+    2  git clone https://github.com/Easoncyx/typo.git
+    3  sudo yum install libxml2-devel libxslt-devel
+    4  sudo chmod o+t -R /tmp
+    5  nvm i v8
+    6  cd typo/
+    7  npm install -g heroku
+    8  sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs
+    9  sudo su
+   10  rvm install 2.4.0
+   11  rvm install 1.9.3
+   12  rvm use 1.9.3
+   13  gem install rails -v '3.0.10'
+   14  bundle install
+   15  vim Gemfile
+   16  sudo su
+   17  bundle install
+   18  sudo service postgresql initdb
+   19  sudo vim /var/lib/pgsql9/data/postgresql.conf
+   20  sudo vim /var/lib/pgsql9/data/pg_hba.conf
+   21  sudo service postgresql restart
+   22  sudo su - postgres
+   23  rake db:setup
+   24  rake db:migrate
+   25  rails server -p $PORT -b $IP
+   26  heroku create --stack cedar-14
+   27  git add .
+   28  git status
+   29  git commit -m "first"
+   30  git config --global user.name "Yixu Chen"
+   31  git config --global user.email cyx709671676@gmail.com
+   33  git remote -v
+   35  git push origin master
+   36  git push heroku master
+   37  heroku rake db:migrate
+   38  heroku open
+```
+
