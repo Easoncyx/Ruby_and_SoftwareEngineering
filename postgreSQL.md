@@ -216,6 +216,17 @@ See [this link](https://www.codementor.io/engineerapart/getting-started-with-pos
 
   `postgres -V`
 
+# Set up Postgres on Heroku
+
+Heroku create postgresql addons
+
+```
+ 3453  heroku addons:create heroku-postgresql:hobby-dev
+ 3454  heroku addons
+ 3459  heroku pg:psql
+ 3460  heroku pg:info
+```
+
 
 
 ## User

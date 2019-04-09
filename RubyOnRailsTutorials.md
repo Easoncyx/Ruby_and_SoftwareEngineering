@@ -458,5 +458,162 @@ views/static_pages/help.html.erb
 
 ## 第一个测试
 
+in `test/controllers/static_pages_controller_test.rb`
 
+add test for `about` method
+
+```ruby
+require 'test_helper'
+
+class StaticPagesControllerTest < ActionDispatch::IntegrationTest
+  test "should get home" do
+    get static_pages_home_url
+    assert_response :success
+  end
+
+  test "should get help" do
+    get static_pages_help_url
+    assert_response :success
+  end
+
+  test "should get about" do
+    get static_pages_about_url
+    assert_response :success
+  end
+end
+
+```
+
+
+
+
+
+add `get 'static_pages/about'` to routs.rb
+
+```ruby
+Rails.application.routes.draw do
+  get 'static_pages/home'
+  get 'static_pages/help'
+  get 'static_pages/about'
+  root 'application#hello'
+end
+
+```
+
+
+
+define `about` method in `app/controllers/static_pages_controller.rb`
+
+```ruby
+class StaticPagesController < ApplicationController
+  def home
+  end
+
+  def help
+  end
+
+  def about
+  end
+  
+end
+```
+
+
+
+create a new view
+
+`app/view/static_pages/about.html.erb`
+
+
+
+```ruby
+<h1>About</h1>
+  <p> 
+		The <a href="http://www.railstutorial.org/"><em>Ruby on Rails Tutorial</em></a> is a 
+		<a href="http://www.railstutorial.org/book">book</a> and 
+		<a href="http://screencasts.railstutorial.org/">screencast series</a> 
+		to teach web development with 
+		<a href="http://rubyonrails.org/">Ruby on Rails</a>.
+		This is the sample application for the tutorial.
+
+</p>
+```
+
+
+
+run
+
+```
+rails test
+```
+
+
+
+## 有点动态内容的页面
+
+assert_select
+
+assert_select 方法的作用是检查有没有指定的 HTML 标签。这种方法有时也叫“选择符”（selector）
+
+`assert_select "title", "Home | Ruby on Rails Tutorial Sample App"` 
+
+这行代码的作用是检查有没有` <title>` 标签，以及其中的内容是不是`“Home | Ruby on Rails Tutorial Sample App”`字符串。
+
+
+
+
+
+# Database operation
+
+- **db:create** Creates the database for the current RAILS_ENV environment. If RAILS_ENV is not specified it defaults to the *development* and *test* databases.
+- **db:create:all** Creates the database for *all* environments.
+- **db:drop** Drops the database for the current RAILS_ENV environment. If RAILS_ENV is not specified it defaults to the *development* and *test* databases.
+- **db:drop:all** Drops the database for *all* environments.
+- **db:migrate** Runs migrations for the current environment that have not run yet. By default it will run migrations *only* in the *development* environment.
+- **db:migrate:redo** Runs **db:migrate:down** and **db:migrate:up** or **db:migrate:rollback** and **db:migrate:up** depending on the specified migration. I usually run this after creating and running a new migration to ensure the migration is reversable.
+- **db:migrate:up** Runs the *up* for the given migration VERSION.
+- **db:migrate:down** Runs the *down* for the given migration VERSION.
+- **db:migrate:status** Displays the current migration status.
+- **db:migrate:rollback** Rolls back the last migration.
+- **db:version** Prints the current schema version.
+- **db:forward** Pushes the schema to the next version.
+- **db:seed** Runs the *db/seeds.rb* file.
+- **db:schema:load** Loads the schema into the current environment’s database.
+- **db:schema:dump** Dumps the current environment’s schema to *db/schema.rb*.
+- **db:setup** Runs **db:create**, **db:schema:load** and **db:seed**.
+- **db:reset** Runs **db:drop** and **db:setup**.
+- **db:migrate:reset** Runs **db:drop**, **db:create** and **db:migrate**.
+- **db:test:prepare** Check for pending migrations and load the test schema. (If you run *rake*without any arguments it will do this by default.)
+- **db:test:clone** Recreate the test database from the current environment’s database schema.
+- **db:test:clone_structure** Similar to **db:test:clone**, but it will ensure that your test database has the same structure, including charsets and collations, as your current environment’s database.
+- **db:environment:set** Set the current RAILS_ENV environment in the `ar_internal_metadata` table. (Used as part of the [protected environment](https://blog.bigbinary.com/2016/06/07/rails-5-prevents-destructive-action-on-production-db.html) check.)
+- **db:check_protected_environments** Checks if a destructive action can be performed in the current RAILS_ENV environment. Used internally when running a destructive action such as **db:drop** or **db:schema:load**.
+
+# require and include
+
+[Link](<https://stackoverflow.com/questions/318144/what-is-the-difference-between-include-and-require-in-ruby>)
+
+The include and require methods do very different things.
+
+The require method does what include does in most other programming languages: run another file. It also tracks what you've required in the past and won't require the same file twice. To run another file without this added functionality, you can use the load method.
+
+The include method takes all the methods from another module and includes them into the current module. This is a language-level thing as opposed to a file-level thing as with require. The include method is the primary way to "extend" classes with other modules (usually referred to as mix-ins). For example, if your class defines the method "each", you can include the mixin module Enumerable and it can act as a collection. This can be confusing as the include verb is used very differently in other languages.
+
+
+
+**"require"** is similar to the C include, which may cause newbie confusion. (One notable difference is that locals inside the required file "evaporate" when the require is done.)
+
+The Ruby **include** is nothing like the C include. The include statement "mixes in" a module into a class. It's a **limited form of multiple inheritance**. An included module literally bestows an "is-a" relationship on the thing including it.
+
+# Active Record
+
+## Find 方法
+
+###  find_by_id / find
+
+如果id=10 的User不存在
+
+`@user = User.find(10)`会报错
+
+`@user = User.find_by_id(10)`不会报错
 
